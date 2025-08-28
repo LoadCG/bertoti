@@ -86,7 +86,7 @@ O sistema envolve duas entidades principais: **Usuário** e **Endereço**. O rel
 
 ### Diagrama de Classes
 
-```yaml
+```text
 
 +-----------------+       +----------------------+
 |     Usuario     |       |       Endereco       |
@@ -249,4 +249,6 @@ public class UsuarioEnderecoTest {
     }
 }
 ```
+
+---
 
