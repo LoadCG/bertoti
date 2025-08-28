@@ -15,7 +15,7 @@ Cada atividade será organizada em seções próprias, contendo o enunciado (qua
 
 ---
 
-## 📚 Parte 1 — Comentários sobre *Software Engineering at Google*
+## 📚 Exercício 1) — Comentários sobre *Software Engineering at Google*
 
 ### Texto 1 — Percepção da Engenharia de Software
 
@@ -27,6 +27,8 @@ Muitas vezes, o engenheiro de software é visto como menos responsável que, por
 Essa visão é equivocada — existem softwares que controlam sistemas críticos e cuidam diretamente de vidas humanas.
 
 ---
+
+## 📚 Exercício 2) — Comentários sobre *Software Engineering at Google*
 
 ### Texto 2 — *Programming Over Time*
 
@@ -40,7 +42,7 @@ Acredito que, se empresas de grande porte — como o próprio **Google**, citado
 
 ---
 
-## ⚖ Parte 2 — Três exemplos de *trade-offs* em Engenharia de Software
+## ⚖ Exercício 3) — Três exemplos de *trade-offs* em Engenharia de Software
 
 Um **trade-off** é uma decisão que implica abrir mão de algo para ganhar outra coisa em troca.  
 Em engenharia de software, eles aparecem frequentemente quando equilibramos critérios como desempenho, custo, prazo e qualidade.
@@ -69,7 +71,182 @@ Em engenharia de software, eles aparecem frequentemente quando equilibramos crit
 
 ---
 
-## 🔄 Próximos Passos
-- Incluir as próximas atividades da disciplina neste repositório, seguindo o mesmo padrão de organização.
-- Criar um índice geral para navegação entre atividades.
-- Complementar as reflexões com exemplos práticos e estudos de caso.
+# 📝 Atividade 2 — Modelo de Classes e Testes Automatizados
+
+### Objetivo
+- Criar um **modelo de classes** simples em Java para um sistema de cadastro de **Usuários** e **Endereços**.
+- Implementar o código Java para as classes `Usuario` e `Endereco`, com a respectiva associação.
+- Criar testes automatizados utilizando **JUnit** para validar o funcionamento das classes e do relacionamento entre elas.
+
+---
+
+## 📚 Exercício 4) — Diagrama de Classes
+
+O sistema envolve duas entidades principais: **Usuário** e **Endereço**. O relacionamento entre elas é de **1:N**, ou seja, um **Usuário** pode ter vários **Endereços**.
+
+### Diagrama de Classes
+
+```yaml
+
++-----------------+       +----------------------+
+|     Usuario     |       |       Endereco       |
++-----------------+       +----------------------+
+| - idUsuario: int|<>---->| - idEndereco: int    |
+| - nome: String  |       | - logradouro: String |
+| - email: String |       | - numero: String     |
++-----------------+       | - bairro: String     |
+                          | - usuario: Usuario   |
+                          +----------------------+
+```
+
+---
+
+## 📚 Exercício 5) — Códigos das Classes em Java
+
+### Classe `Usuario.java`
+
+```java
+public class Usuario {
+    private int idUsuario;
+    private String nome;
+    private String email;
+
+    // Construtores
+    public Usuario(int idUsuario, String nome, String email) {
+        this.idUsuario = idUsuario;
+        this.nome = nome;
+        this.email = email;
+    }
+
+    // Getters e Setters
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
+```
+
+### Classe `Endereco.java`
+
+```java
+public class Endereco {
+    private int idEndereco;
+    private String logradouro;
+    private String numero;
+    private String bairro;
+    private Usuario usuario;  // Relacionamento com a classe Usuario
+
+    // Construtores
+    public Endereco(int idEndereco, String logradouro, String numero, String bairro, Usuario usuario) {
+        this.idEndereco = idEndereco;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.usuario = usuario;
+    }
+
+    // Getters e Setters
+    public int getIdEndereco() {
+        return idEndereco;
+    }
+
+    public void setIdEndereco(int idEndereco) {
+        this.idEndereco = idEndereco;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+}
+```
+## 📚 Exercício 6) — Códigos dos Testes Automatizados em Java
+
+### Classe de Teste `UsuarioEnderecoTest.java`
+
+```java
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class UsuarioEnderecoTest {
+
+    private Usuario usuario;
+    private Endereco endereco;
+
+    @BeforeEach
+    public void setUp() {
+        usuario = new Usuario(1, "João", "joao@example.com");
+        endereco = new Endereco(1, "Rua A", "123", "Centro", usuario);
+    }
+
+    @Test
+    public void testUsuarioEndereco() {
+        // Teste de associação: Verificando se o Endereço está corretamente associado ao Usuário
+        assertNotNull(endereco.getUsuario());
+        assertEquals("João", endereco.getUsuario().getNome());
+        assertEquals(1, endereco.getUsuario().getIdUsuario());
+        assertEquals("Rua A", endereco.getLogradouro());
+        assertEquals("Centro", endereco.getBairro());
+    }
+
+    @Test
+    public void testUsuarioNome() {
+        // Teste para verificar o nome do usuário
+        assertEquals("João", usuario.getNome());
+    }
+
+    @Test
+    public void testEnderecoBairro() {
+        // Teste para verificar o bairro do endereço
+        assertEquals("Centro", endereco.getBairro());
+    }
+}
+```
+
