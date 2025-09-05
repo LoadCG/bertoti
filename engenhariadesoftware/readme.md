@@ -251,4 +251,171 @@ public class UsuarioEnderecoTest {
 ```
 
 ---
+# 📝 Atividade 3 — Modelo de Classes e Testes Automatizados (Livro e Categoria)
 
+### Objetivo
+- Criar um **modelo de classes** em Java para um sistema de cadastro de **Livros** e suas **Categorias**.
+- Implementar o código Java para as classes `Livro` e `Categoria`, com a respectiva associação entre elas.
+- Criar **testes automatizados utilizando JUnit** para validar o funcionamento das classes e da associação.
+
+---
+
+## 📚 Exercício 7) — Diagrama de Classes
+
+O sistema envolve duas entidades principais: **Livro** e **Categoria**. O relacionamento entre elas é de **1:N**, ou seja, uma **Categoria** pode conter vários **Livros**.
+
+### Diagrama de Classes
+
+```text
++----------------+       +--------------------------+
+|   Categoria    |       |          Livro           |
++----------------+       +--------------------------+
+| - id: int      |<----->| - id: int                |
+| - nome: String |       | - titulo: String         |
++----------------+       | - autor: String          |
+                         | - isbn: String           |
+                         | - categoria: Categoria   |
+                         +--------------------------+
+```
+
+--- 
+
+## 📚 Exercício 8) — Códigos das Classes em Java
+
+### Classe `Categoria.java`
+
+```java
+public class Categoria {
+    private int id;
+    private String nome;
+
+    // Construtor
+    public Categoria(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
+    // Getters e Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+}
+```
+
+### Classe `Livro.java`
+
+```java
+public class Livro {
+    private int id;
+    private String titulo;
+    private String autor;
+    private String isbn;
+    private Categoria categoria;  // Associação
+
+    // Construtor
+    public Livro(int id, String titulo, String autor, String isbn, Categoria categoria) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.isbn = isbn;
+        this.categoria = categoria;
+    }
+
+    // Getters e Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+}
+```
+
+### Classe `LivroCategoriaTest.java`
+---
+
+## 📚 Exercício 9) — Códigos dos Testes Automatizados em Java
+
+### Classe de teste `LivroCategoriaTest.java`
+
+```java
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class LivroCategoriaTest {
+
+    private Categoria categoria;
+    private Livro livro;
+
+    @BeforeEach
+    public void setUp() {
+        categoria = new Categoria(1, "Ficção Científica");
+        livro = new Livro(1, "Duna", "Frank Herbert", "978-0441172719", categoria);
+    }
+
+    @Test
+    public void testLivroCategoriaAssociacao() {
+        assertNotNull(livro.getCategoria());
+        assertEquals("Ficção Científica", livro.getCategoria().getNome());
+    }
+
+    @Test
+    public void testLivroTituloAutor() {
+        assertEquals("Duna", livro.getTitulo());
+        assertEquals("Frank Herbert", livro.getAutor());
+    }
+
+    @Test
+    public void testCategoriaNome() {
+        assertEquals("Ficção Científica", categoria.getNome());
+    }
+}
+```
+
+---
