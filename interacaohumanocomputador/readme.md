@@ -17,7 +17,7 @@ Este repositório contém o projeto prático desenvolvido para a disciplina de *
 
 O desenvolvimento e a documentação técnica foram concentrados em um notebook do Google Colab. Clique no botão abaixo para visualizar:
 
-[![Open In Colab]([https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1sbVBlGblmVkMraj8jFJT2Qa23rGt2Zw4?usp=sharing](https://colab.research.google.com/drive/1sbVBlGblmVkMraj8jFJT2Qa23rGt2Zw4?usp=sharing))
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1sbVBlGblmVkMraj8jFJT2Qa23rGt2Zw4?usp=sharing)
 
 ---
 
